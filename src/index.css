@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Built from AWDEA's own logo coral (#ea534d) rather than the blue the current
+   site uses, which appears nowhere in their branding.
+   --color-brand is a darkened coral: the logo colour itself only reaches
+   3.6:1 on paper, fine for large shapes but short of the 4.5:1 body text
+   needs. The original stays available for oversized and decorative use. */
+@theme {
+  --color-ink: #1c1614;
+  --color-brand: #c0392b;
+  --color-brand-dark: #96291d;
+  /* For small coral text that can end up over a drifting bubble. --color-brand
+     itself is only 3.7:1 there — coral on coral — which fails the 4.5:1 small
+     text needs. This clears it at 4.9:1. */
+  --color-brand-deep: #92251a;
+  --color-brand-bright: #ea534d;
+  --color-accent: #0f766e;
+  --color-paper: #fffaf8;
+  --color-mist: #f9ede8;
+}
+
+/* Scroll animation is driven by src/lib/smoothScroll.ts so the duration is
+   controllable; CSS smooth scrolling would fight it. */
+html {
+  /* Belt-and-braces against horizontal scroll: entrance animations translate
+     elements off-axis before settling. */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+button {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Long words (names, email addresses, URLs) must not force horizontal scroll
+   at narrow widths or high zoom. */
+h1, h2, h3, p, li, dd, td, th {
+  overflow-wrap: break-word;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--color-ink);
+  color: #fff;
+  font-weight: 600;
+  transition: top 200ms ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
