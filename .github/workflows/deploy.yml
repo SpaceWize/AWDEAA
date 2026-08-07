@@ -43,6 +43,11 @@ jobs:
           VITE_GCAL_KEY: ${{ secrets.VITE_GCAL_KEY }}
 
       - uses: actions/configure-pages@v5
+        with:
+          # Switches the repository from branch-based Pages to Actions-based
+          # publishing. Without it, GitHub serves the repo root as-is — which
+          # means raw index.html and a site with no CSS.
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
